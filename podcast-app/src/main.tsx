@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import HomePage from './pages/HomePage';
-import PodcastPage from './pages/PodcastPage';
-import EpisodePage from './pages/EpisodePage';
-import NotFoundPage from './pages/NotFoundPage';
+import HomePage from './pages/HomePage/HomePage';
+import PodcastPage from './pages/PodcastPage/PodcastPage';
+import EpisodePage from './pages/EpisodePage/EpisodePage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const router = createBrowserRouter([{
   path: '/',

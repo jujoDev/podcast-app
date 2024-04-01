@@ -77,6 +77,7 @@ export interface PodcastDetails {
     author: string;
     description: string;
     url: string;
+    image: string;
 }
 
 export interface PodcastDetailsResponse {
@@ -112,5 +113,14 @@ export interface PodcastDetailsResponse {
     "artworkUrl600": string,
     "genreIds": string[],
     "genres": string[]
+}
+
+export interface EpisodeDetails {
+    description: string | null | undefined;
+    duration: string | null | undefined;
+    id: string | null | undefined;
+    published: string | null | undefined;
+    title: string | null | undefined;
+    url: string | null | undefined;
 }
 
