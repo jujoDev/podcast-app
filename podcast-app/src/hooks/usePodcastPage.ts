@@ -22,10 +22,8 @@ export const usePodcastPage = () => {
                 const details: PodcastDetails = await getPodcastDetails(podcastId);
                 setPodcastDetails(details);
                 setPodcastDetailsCtx(details);
-                console.log(details)
                 const episodes: EpisodeDetails[] = await getEpisodes(details.url);
                 setEpisodes(episodes);
-                console.log(episodes)
                 setIsLoading(false);
             }
         })();

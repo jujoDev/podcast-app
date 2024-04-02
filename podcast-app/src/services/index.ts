@@ -19,7 +19,6 @@ export const getPodcastDetails = async (podcastId: string) => {
     const response = await fetch(`${CORS_URL}${encodeURIComponent(`${API_URL}lookup?id=${podcastId}`)}`)
     const data = await response.json();
     const podcastFound = JSON.parse(data.contents).results[0];
-    console.log(podcastFound);
     const podcastDetails: PodcastDetails = {
         id: podcastFound.trackId,
         name: podcastFound.trackName,
@@ -37,7 +36,6 @@ export const getEpisodes = async (podcastUrl: string) => {
     const stringWithXML = await response.text();
     const XMLdocument = await parser.parseFromString(stringWithXML, "text/xml");
     const items = XMLdocument.querySelectorAll("item");
-    console.log(items[0]);
     const episodes: EpisodeDetails[] = Array.from(items).map((item) => {
         const initialStringDate: string | null | undefined = item.querySelector("pubDate")?.textContent;
         let formatedDate: string = "Date not available";
