@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage/HomePage';
 import PodcastPage from './pages/PodcastPage/PodcastPage';
 import EpisodePage from './pages/EpisodePage/EpisodePage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import ContextProvider from './context/ContextProvider';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -21,6 +22,8 @@ const router = createBrowserRouter([{
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ContextProvider>
+      <RouterProvider router={router} />
+    </ContextProvider>
   </React.StrictMode>,
 )

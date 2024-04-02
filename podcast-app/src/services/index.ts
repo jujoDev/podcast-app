@@ -28,6 +28,7 @@ export const getPodcastDetails = async (podcastId: string) => {
         url: podcastFound.feedUrl,
         image: podcastFound.artworkUrl600
     };
+    return podcastDetails;
 }
 
 export const getEpisodes = async (podcastUrl: string) => {
@@ -54,6 +55,6 @@ export const getEpisodes = async (podcastUrl: string) => {
 
         }
     });
-    console.log(episodes[0])
+    return episodes
 }
 
