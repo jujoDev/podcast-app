@@ -15,9 +15,9 @@ export const EpisodePage = () => {
                 {selectedEpisode?.title ?
                     <div className='col-span-2 p-4 bg-white rounded-lg shadow-md'>
                         <h2 className='font-bold text-xl'>{selectedEpisode.title}</h2>
-                        <div dangerouslySetInnerHTML={{ __html: selectedEpisode.description }} />
+                        {selectedEpisode.description ? <div dangerouslySetInnerHTML={{ __html: selectedEpisode.description }} /> : null}
                         <audio onLoadedData={() => setIsLoading(false)} controls>
-                            <source src={selectedEpisode.url} type='audio/mpeg' />
+                            {selectedEpisode.url ? <source src={selectedEpisode.url} type='audio/mpeg' /> : null}
                             Your browser does not support the audio element.
                         </audio>
                     </div>
