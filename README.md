@@ -38,7 +38,7 @@ This will create an optimized production build in the dist directory.
 
 To serve the production build locally, you can use:
 ```bash
-npm run serve
+npm run preview
 ```
 
 This will start a production server, and you can access the app at your **localhost**.
