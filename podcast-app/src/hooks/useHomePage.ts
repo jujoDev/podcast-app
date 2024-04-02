@@ -17,7 +17,12 @@ export const useHomePage = () => {
     const filterPodcasts = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value;
         const filterResults = podcasts.filter((podcast: Podcast) => podcast.name.toLowerCase().includes(input.toLowerCase()));
-        filterResults.length ? setFilteredPodcasts(filterResults) : setFilteredPodcasts(podcasts);
+        if (input) {
+            filterResults.length ? setFilteredPodcasts(filterResults) : setFilteredPodcasts([]);
+        } else {
+            setFilteredPodcasts(podcasts);
+        }
+
     }
     useEffect(() => {
         (async () => {

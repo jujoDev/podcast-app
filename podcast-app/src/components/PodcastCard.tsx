@@ -10,11 +10,14 @@ interface Props {
 export const PodcastCard: FC<Props> = ({ podcast, handleClick }) => {
 
     return (
-        <Link to={`/${podcast.id}`} onClick={() => handleClick(podcast.description, podcast.id)}>
-            <div className='shadow-md w-fit	flex justify-center flex-col p-4'>
-                <img className='rounded-full object-cover relative -translate-y-6 w-48	' src={podcast.image} alt={podcast.name} />
-                <p>{podcast.name}</p>
-                <p>Author: {podcast.author}</p>
+        <Link className='w-full' to={`/${podcast.id}`} onClick={() => handleClick(podcast.description, podcast.id)}>
+            <div className='shadow-md flex justify-center items-center flex-col p-4 text-center max-h-52	'>
+                <img className='rounded-full object-cover w-48 relative -translate-y-10	' src={podcast.image} alt={podcast.name} />
+                <div className='relative -translate-y-5 pb-6'>
+                    <p className='font-bold'>{podcast.name}</p>
+                    <p className='font-extralight'>Author: {podcast.author}</p>
+                </div>
+
             </div></Link>
     )
 }

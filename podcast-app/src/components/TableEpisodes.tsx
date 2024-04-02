@@ -12,7 +12,7 @@ interface Props {
 const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
     const { podcastId } = useContext(PodcastContext);
     return (
-        <div className='col-span-2 flex flex-col w-full'>
+        <div className='sm:col-span-1 md:col-span-2 lg:col-span-3 flex flex-col w-full'>
             <div className='flex justify-start mb-5 shadow-md align-top flex-col p-4'>
                 <h2 className='font-bold text-xl'>
                     Episodes: {episodes.length}
@@ -26,15 +26,27 @@ const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
                             <th className='text-left'>Date</th>
                             <th className='text-left'>Duration</th>
                         </tr>
+                        <tr>
+                            <td colSpan={3}>
+                                <hr className='border-gray-300 my-2' />
+                            </td>
+                        </tr>
                     </thead>
                     <tbody>
                         {episodes.map((episode: EpisodeDetails, index: number) => {
                             return (
-                                <tr className={index % 2 === 0 ? 'even-row' : 'odd-row'} key={episode.id}>
-                                    <Link onClick={() => handleClick(episode)} to={`/${podcastId}/episode/${episode.id}`}><td className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}</td></Link>
-                                    <td>{episode.published}</td>
-                                    <td>{episode.duration}</td>
-                                </tr>
+                                <>
+                                    <tr className={index % 2 === 0 ? 'even-row' : 'odd-row'} key={episode.id}>
+                                        <Link onClick={() => handleClick(episode)} to={`/${podcastId}/episode/${episode.id}`}><td className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}</td></Link>
+                                        <td>{episode.published}</td>
+                                        <td>{episode.duration}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={3}>
+                                            <hr className='border-gray-300 shadow-md' />
+                                        </td>
+                                    </tr></>
                             )
                         })}
                     </tbody>

@@ -9,9 +9,9 @@ import './css/index.css';
 export const PodcastPage = () => {
     const { isLoading, podcastDetails, episodes, podcastDescription, handleClick } = usePodcastPage();
     return (
-        <div className='w-100'>
+        <div className='w-100 m-10'>
             <Header isLoading={isLoading} />
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-6 place-items-center align-top'>
+            <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-20 gap-y-6'>
                 {podcastDetails?.name ? <PodcastDetailsCard podcastDescription={podcastDescription} podcastDetails={podcastDetails} /> : null}
                 {episodes.length > 0 ? <TableEpisodes handleClick={handleClick} episodes={episodes} /> : null}
             </div>
