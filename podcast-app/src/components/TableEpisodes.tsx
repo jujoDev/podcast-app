@@ -1,12 +1,11 @@
 import { FC, useContext } from 'react';
 import { EpisodeDetails } from '../types/config';
-import { Link } from 'react-router-dom';
 import { PodcastContext } from "../context/podcastContext";
 
 
 interface Props {
     episodes: EpisodeDetails[];
-    handleClick: (episode: EpisodeDetails) => void;
+    handleClick: (episode: EpisodeDetails, podcastId: string) => void;
 }
 
 const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
@@ -37,12 +36,13 @@ const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
                             return (
                                 <>
                                     <tr className={index % 2 === 0 ? 'even-row' : 'odd-row'} key={`${episode.id}_${podcastId}`}>
-                                        <Link onClick={() => handleClick(episode)} to={`/${podcastId}/episode/${episode.id}`}><td className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}</td></Link>
+                                        <td onClick={() => handleClick(episode, podcastId)} className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}
+                                        </td>
                                         <td>{episode.published}</td>
                                         <td>{episode.duration}</td>
 
                                     </tr>
-                                    <tr>
+                                    <tr key={`${episode.id}_bar}`}>
                                         <td colSpan={3}>
                                             <hr className='border-gray-300 shadow-md' />
                                         </td>
