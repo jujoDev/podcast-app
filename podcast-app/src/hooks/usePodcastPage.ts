@@ -6,11 +6,14 @@ import { PodcastContext } from "../context/podcastContext";
 
 
 export const usePodcastPage = () => {
-    const { podcastDescription, podcastId, setPodcastDetailsCtx } = useContext(PodcastContext);
+    const { podcastDescription, podcastId, setPodcastDetailsCtx, setSelectedEpisode } = useContext(PodcastContext);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [podcastDetails, setPodcastDetails] = useState<PodcastDetails>();
     const [episodes, setEpisodes] = useState<EpisodeDetails[]>([]);
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
+    const handleClick = (episode: EpisodeDetails) => {
+        setSelectedEpisode(episode);
+    }
     useEffect(() => {
         (async () => {
             if (firstLoad && podcastId) {
@@ -27,5 +30,5 @@ export const usePodcastPage = () => {
             }
         })();
     }, [firstLoad, podcastId, setPodcastDetailsCtx]);
-    return { isLoading, podcastDetails, episodes, podcastDescription };
+    return { isLoading, podcastDetails, episodes, podcastDescription, handleClick };
 }

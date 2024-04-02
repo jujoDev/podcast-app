@@ -116,11 +116,11 @@ export interface PodcastDetailsResponse {
 }
 
 export interface EpisodeDetails {
-    description: string | null | undefined;
-    duration: string | null | undefined;
-    id: string | null | undefined;
-    published: string | null | undefined;
-    title: string | null | undefined;
-    url: string | null | undefined;
+    description: string;
+    duration: string;
+    id: string;
+    published: string;
+    title: string;
+    url: string;
 }
 

@@ -6,9 +6,10 @@ import { PodcastContext } from "../context/podcastContext";
 
 interface Props {
     episodes: EpisodeDetails[];
+    handleClick: (episode: EpisodeDetails) => void;
 }
 
-const TableEpisodes: FC<Props> = ({ episodes }) => {
+const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
     const { podcastId } = useContext(PodcastContext);
     return (
         <div className='col-span-2 flex flex-col w-full'>
@@ -30,7 +31,7 @@ const TableEpisodes: FC<Props> = ({ episodes }) => {
                         {episodes.map((episode: EpisodeDetails, index: number) => {
                             return (
                                 <tr className={index % 2 === 0 ? 'even-row' : 'odd-row'} key={episode.id}>
-                                    <Link to={`/${podcastId}/episode/${episode.id}`}><td className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}</td></Link>
+                                    <Link onClick={() => handleClick(episode)} to={`/${podcastId}/episode/${episode.id}`}><td className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}</td></Link>
                                     <td>{episode.published}</td>
                                     <td>{episode.duration}</td>
                                 </tr>
