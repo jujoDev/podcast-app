@@ -1,4 +1,5 @@
 import { API_URL, CORS_URL, type PodcastResponse, type Podcast, type PodcastDetails, type EpisodeDetails } from "../types/config";
+import { formatTime } from "../utils/utils";
 
 export const getAllPodcasts = async () => {
     const response = await fetch(`${API_URL}us/rss/toppodcasts/limit=100/genre=1310/json`);
@@ -43,9 +44,10 @@ export const getEpisodes = async (podcastUrl: string) => {
             const objectDate: Date = new Date(initialStringDate);
             formatedDate = `${objectDate.getDate()}/${objectDate.getMonth() + 1}/${objectDate.getFullYear()}`;
         }
+
         return {
             description: item.querySelector("description")?.textContent,
-            duration: item.querySelector("duration")?.textContent,
+            duration: formatTime(item.querySelector("duration")?.textContent),
             id: item.querySelector("guid")?.textContent,
             published: formatedDate,
             title: item.querySelector("title")?.textContent,
