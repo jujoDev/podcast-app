@@ -9,6 +9,7 @@ export const getAllPodcasts = async () => {
     } catch (error) {
         console.error(error);
     }
+    if (!data.feed) return [];
     const podcasts: Podcast[] = data.feed.entry.map((podcast: PodcastResponse) => {
         return {
             id: podcast.id.attributes["im:id"],
@@ -29,6 +30,14 @@ export const getPodcastDetails = async (podcastId: string) => {
     } catch (error) {
         console.error(error);
     }
+    if (!data.contents) return {
+        id: "",
+        name: "",
+        author: "",
+        description: "",
+        url: "",
+        image: "",
+    };
     const podcastFound = JSON.parse(data.contents).results[0];
     const podcastDetails: PodcastDetails = {
         id: podcastFound.trackId,
