@@ -2,8 +2,13 @@ import { API_URL, CORS_URL, type PodcastResponse, type Podcast, type PodcastDeta
 import { formatTime } from "../utils/utils";
 
 export const getAllPodcasts = async () => {
-    const response = await fetch(`${API_URL}us/rss/toppodcasts/limit=100/genre=1310/json`);
-    const data = await response.json();
+    let data;
+    try {
+        const response = await fetch(`${API_URL}us/rss/toppodcasts/limit=100/genre=1310/json`);
+        data = await response.json();
+    } catch (error) {
+        console.error(error);
+    }
     const podcasts: Podcast[] = data.feed.entry.map((podcast: PodcastResponse) => {
         return {
             id: podcast.id.attributes["im:id"],
@@ -17,8 +22,13 @@ export const getAllPodcasts = async () => {
 }
 
 export const getPodcastDetails = async (podcastId: string) => {
-    const response = await fetch(`${CORS_URL}${encodeURIComponent(`${API_URL}lookup?id=${podcastId}`)}`)
-    const data = await response.json();
+    let data;
+    try {
+        const response = await fetch(`${CORS_URL}${encodeURIComponent(`${API_URL}lookup?id=${podcastId}`)}`)
+        data = await response.json();
+    } catch (error) {
+        console.error(error);
+    }
     const podcastFound = JSON.parse(data.contents).results[0];
     const podcastDetails: PodcastDetails = {
         id: podcastFound.trackId,
@@ -32,10 +42,17 @@ export const getPodcastDetails = async (podcastId: string) => {
 }
 
 export const getEpisodes = async (podcastUrl: string) => {
-    const parser = new DOMParser();
-    const response = await fetch(`${podcastUrl}`);
-    const stringWithXML = await response.text();
-    const XMLdocument = await parser.parseFromString(stringWithXML, "text/xml");
+    let XMLdocument;
+    try {
+        const parser = new DOMParser();
+        const response = await fetch(`${podcastUrl}`);
+        const stringWithXML = await response.text();
+        XMLdocument = await parser.parseFromString(stringWithXML, "text/xml");
+    } catch (error) {
+        console.error(error);
+    }
+    if (!XMLdocument) return [];
+
     const items = XMLdocument.querySelectorAll("item");
     const episodes: EpisodeDetails[] = Array.from(items).map((item) => {
         const initialStringDate: string | null | undefined = item.querySelector("pubDate")?.textContent;

@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import Header from "../../components/Header";
 export const NotFoundPage = () => {
     return (
-        <span>
-            <h2>Something went wrong... you can go back to Home pressing the following link </h2>
-            <Link to="/"><h2>Go back to Home</h2></Link>
-        </span>
+        <div className='w-100 m-10'>
+            <Header isLoading={false} />
+            <h2>Something went wrong... you can go back to Home pressing the APP logo </h2>
+        </div>
+
     );
 };
 

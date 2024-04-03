@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { EpisodeDetails } from '../types/config';
 import { PodcastContext } from "../context/podcastContext";
 
@@ -34,20 +34,19 @@ const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
                     <tbody>
                         {episodes.map((episode: EpisodeDetails, index: number) => {
                             return (
-                                <>
-                                    <tr className={index % 2 === 0 ? 'even-row' : 'odd-row'} key={`${episode.id}_${podcastId}`}>
+                                <React.Fragment key={`${episode.id}_${podcastId}`}>
+                                    <tr className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                                         <td onClick={() => handleClick(episode, podcastId)} className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}
                                         </td>
                                         <td>{episode.published}</td>
                                         <td>{episode.duration}</td>
-
                                     </tr>
-                                    <tr key={`${episode.id}_bar}`}>
+                                    <tr>
                                         <td colSpan={3}>
                                             <hr className='border-gray-300 shadow-md' />
                                         </td>
                                     </tr>
-                                </>
+                                </React.Fragment>
                             )
                         })}
                     </tbody>

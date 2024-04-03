@@ -10,7 +10,14 @@ const ContextProvider = ({ children }: Props) => {
     const [podcastDescription, setPodcastDescription] = useState<string>('');
     const [podcastId, setPodcastId] = useState<string>('');
     const [episodeUrl, setEpisodeUrl] = useState<string>('');
-    const [podcastDetailsCtx, setPodcastDetailsCtx] = useState<PodcastDetails>({ id: '', name: '', author: '', description: '', url: '', image: '' });
+    const [podcastDetailsCtx, setPodcastDetailsCtx] = useState<PodcastDetails>({
+        id: '',
+        name: '',
+        author: '',
+        description: '',
+        url: '',
+        image: ''
+    });
     const [selectedEpisode, setSelectedEpisode] = useState<EpisodeDetails>({
         description: '',
         duration: '',
