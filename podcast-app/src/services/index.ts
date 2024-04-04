@@ -4,7 +4,8 @@ import { formatTime } from "../utils/utils";
 export const getAllPodcasts = async () => {
     let data;
     try {
-        const response = await fetch(`${API_URL}us/rss/toppodcasts/limit=100/genre=1310/json`);
+        const response = await fetch(`${CORS_URL}${encodeURIComponent(`${API_URL}us/rss/toppodcasts/limit=100/genre=1310/json`)}`)
+
         data = await response.json();
     } catch (error) {
         console.error(error);
@@ -54,9 +55,9 @@ export const getEpisodes = async (podcastUrl: string) => {
     let XMLdocument;
     try {
         const parser = new DOMParser();
-        const response = await fetch(`${podcastUrl}`);
-        const stringWithXML = await response.text();
-        XMLdocument = await parser.parseFromString(stringWithXML, "text/xml");
+        const response = await fetch(`${CORS_URL}${encodeURIComponent(`${podcastUrl}`)}`);
+        const stringWithXML = await response.json();
+        XMLdocument = await parser.parseFromString(stringWithXML.contents, "text/xml");
     } catch (error) {
         console.error(error);
     }
