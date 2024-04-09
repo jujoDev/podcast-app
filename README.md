@@ -43,6 +43,9 @@ npm run preview
 
 This will start a production server, and you can access the app at your **localhost**.
 
+## Note
+As an alternative branch to deploy the application, the branch "feature/allOrigins" uses the https://allorigins.win/ recourse in all API calls to ensure a 200 response from the server. It's not merged in the main branch due to poor response times that can cause a bad experience with the application when testing it. The main branch, although that some podcasts fail at loading, it takes instantly all episodes from the podcasts that don't present any problem with CORS as could be for example "The Joe Budden Podcast" or "Drink Champs".
+
 ## Dependencies
 - React
 - TypeScript
