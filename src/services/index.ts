@@ -52,6 +52,7 @@ export const getPodcastDetails = async (podcastId: string) => {
 
 export const getEpisodes = async (podcastUrl: string) => {
     let XMLdocument;
+    if (!podcastUrl) return [];
     try {
         const parser = new DOMParser();
         const response = await fetch(`${podcastUrl}`);
@@ -70,11 +71,10 @@ export const getEpisodes = async (podcastUrl: string) => {
             const objectDate: Date = new Date(initialStringDate);
             formatedDate = `${objectDate.getDate()}/${objectDate.getMonth() + 1}/${objectDate.getFullYear()}`;
         }
-
         return {
             description: item.querySelector("description")?.textContent,
             duration: formatTime(item.querySelector("duration")?.textContent),
-            id: item.querySelector("guid")?.textContent,
+            id: item.querySelector("guid")?.textContent?.includes("/") ? item.querySelector("guid")?.textContent?.split('/')[1] : item.querySelector("guid")?.textContent,
             published: formatedDate,
             title: item.querySelector("title")?.textContent,
             url: item.querySelector("enclosure")?.getAttribute("url"),

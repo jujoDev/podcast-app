@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { getAllPodcasts } from "../services";
 import { Podcast } from "../types/config";
 import { PodcastContext } from "../context/podcastContext";
+import { getStorage } from "../utils/methods/getStorage";
 
 export const useHomePage = () => {
     const contextValue = useContext(PodcastContext)!;
@@ -29,23 +30,8 @@ export const useHomePage = () => {
             if (firstLoad) {
                 setFirstLoad(false);
                 setIsLoading(true);
-                const storedPodcastsData = localStorage.getItem('podcasts_data');
-                const storedTimestamp = localStorage.getItem('podcasts_timestamp');
-                let podcasts;
-                if (storedPodcastsData && storedTimestamp) {
-                    const storedTime = new Date(storedTimestamp).getTime();
-                    const currentTime = new Date().getTime();
-                    const twentyFourHours = 24 * 60 * 60 * 1000;
-                    if (currentTime - storedTime > twentyFourHours) {
-                        localStorage.removeItem('podcasts_data');
-                        localStorage.removeItem('podcasts_timestamp');
-                        podcasts = await getAllPodcasts();
-                        localStorage.setItem('podcasts_data', JSON.stringify(podcasts));
-                        localStorage.setItem('podcasts_timestamp', new Date().toISOString());
-                    } else {
-                        podcasts = JSON.parse(storedPodcastsData);
-                    }
-                } else {
+                let podcasts = getStorage('podcasts');
+                if (!podcasts) {
                     podcasts = await getAllPodcasts();
                     localStorage.setItem('podcasts_data', JSON.stringify(podcasts));
                     localStorage.setItem('podcasts_timestamp', new Date().toISOString());

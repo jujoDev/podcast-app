@@ -5,7 +5,7 @@ import { PodcastContext } from "../context/podcastContext";
 
 interface Props {
     episodes: EpisodeDetails[];
-    handleClick: (episode: EpisodeDetails, podcastId: string) => void;
+    handleClick: (episode: EpisodeDetails) => void;
 }
 
 const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
@@ -36,7 +36,7 @@ const TableEpisodes: FC<Props> = ({ episodes, handleClick }) => {
                             return (
                                 <React.Fragment key={`${episode.id}_${podcastId}`}>
                                     <tr className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-                                        <td onClick={() => handleClick(episode, podcastId)} className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}
+                                        <td onClick={() => handleClick(episode)} className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>{episode.title}
                                         </td>
                                         <td>{episode.published}</td>
                                         <td>{episode.duration}</td>
