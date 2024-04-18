@@ -13,17 +13,17 @@ export const PodcastDetailsCard: FC<Props> = ({ podcastDetails, podcastDescripti
     const navigate = useNavigate();
     const { name, author, image } = podcastDetails;
     return (
-        <div className='shadow-md w-auto	 flex items-center flex-col p-4 m-0'>
+        <div className='flex flex-col items-center w-auto p-4 m-0 shadow-md'>
             <div className={episodeView ? 'cursor-pointer' : ''} onClick={() => episodeView && navigate(-1)}>
-                <img className='object-cover relative w-48 m-4 rounded-md' src={image} alt={name} />
-                <hr className='border-t border-gray-300 w-full my-4' />
-                <div className='text-start w-full'>
+                <img className='relative object-cover w-48 m-4 rounded-md' src={image} alt={name} />
+                <hr className='w-full my-4 border-t border-gray-300' />
+                <div className='w-full text-start'>
                     <p className='font-bold'>{name}</p>
                     <p className='italic'>by {author}</p>
                 </div>
             </div>
-            <hr className='border-t border-gray-300 w-full my-4' />
-            <div className='text-start w-full'>
+            <hr className='w-full my-4 border-t border-gray-300' />
+            <div className='w-full text-start'>
                 <p className='font-semibold'>Description: </p>
                 <p className='italic'>{podcastDescription}</p>
             </div>
